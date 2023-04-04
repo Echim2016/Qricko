@@ -39,12 +39,31 @@ class ShareViewController: UIViewController {
                     return item as? UIImage
                 }
             }()
-            guard let image, let urlString = image.getURLFromImage() else { return }
-            DispatchQueue.main.async {
-                self.showWebView(urlString) { [weak self] in
-                    self?.extensionContext?.completeRequest(returningItems: nil)
+            
+            if let image, let urlString = image.getURLFromImage() {
+                DispatchQueue.main.async {
+                    self.showWebView(urlString) { [weak self] in
+                        self?.extensionContext?.completeRequest(returningItems: nil)
+                    }
                 }
+            } else {
+                self.showAlert(with: "Oops! URL not found...")
             }
+        }
+    }
+    
+    private func showAlert(with message: String) {
+        let controller = UIAlertController(
+            title: nil,
+            message: message,
+            preferredStyle: .alert
+        )
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            self.extensionContext?.completeRequest(returningItems: nil)
+        }
+        controller.addAction(okAction)
+        DispatchQueue.main.async {
+            self.present(controller, animated: true)
         }
     }
 }
