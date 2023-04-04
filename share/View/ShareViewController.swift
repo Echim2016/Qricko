@@ -12,6 +12,7 @@ import UniformTypeIdentifiers
 class ShareViewController: UIViewController {
     
     private let imageTypeIdentifier = UTType.image.identifier
+    private let urlTypeIdentifier = UTType.url.identifier
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -21,13 +22,19 @@ class ShareViewController: UIViewController {
     private func handleShareItem() {
         guard
             let extensionItem = extensionContext?.inputItems.first as? NSExtensionItem,
-            let itemProvider = extensionItem.attachments?.first,
-            itemProvider.hasItemConformingToTypeIdentifier(imageTypeIdentifier)
+            let itemProvider = extensionItem.attachments?.first
         else {
-            self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
+            self.extensionContext?.completeRequest(returningItems: nil)
             return
         }
-        handleImage(with: itemProvider)
+        
+        if itemProvider.hasItemConformingToTypeIdentifier(imageTypeIdentifier) {
+            handleImage(with: itemProvider)
+        } else if itemProvider.hasItemConformingToTypeIdentifier(urlTypeIdentifier){
+            handleUrl(with: itemProvider)
+        } else {
+            self.extensionContext?.completeRequest(returningItems: nil)
+        }
     }
     
     private func handleImage(with itemProvider: NSItemProvider) {
@@ -52,6 +59,19 @@ class ShareViewController: UIViewController {
         }
     }
     
+    private func handleUrl(with itemProvider: NSItemProvider) {
+        itemProvider.loadItem(forTypeIdentifier: urlTypeIdentifier, options: nil) { (item, error) in
+            guard let url = item as? URL else { return }
+            DispatchQueue.main.async {
+                self.showWebView(url.absoluteString) { [weak self] in
+                    self?.extensionContext?.completeRequest(returningItems: nil)
+                }
+            }
+        }
+    }
+}
+
+extension ShareViewController {
     private func showAlert(with message: String) {
         let controller = UIAlertController(
             title: nil,
