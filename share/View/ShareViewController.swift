@@ -41,7 +41,9 @@ class ShareViewController: UIViewController {
             }()
             guard let image, let urlString = image.getURLFromImage() else { return }
             DispatchQueue.main.async {
-                self.showWebView(urlString)
+                self.showWebView(urlString) { [weak self] in
+                    self?.extensionContext?.completeRequest(returningItems: nil)
+                }
             }
         }
     }

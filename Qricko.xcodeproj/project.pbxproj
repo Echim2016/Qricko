@@ -20,6 +20,7 @@
 		9C10D84629DBFBC100F2BE40 /* share.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9C10D83C29DBFBC100F2BE40 /* share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9C3F0F4629DC147200F1CFDE /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3F0F4529DC147200F1CFDE /* UIViewController+Extension.swift */; };
 		9C3F0F4829DC14D700F1CFDE /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3F0F4729DC14D700F1CFDE /* UIImage+Extension.swift */; };
+		9C3F0F4C29DC1FFC00F1CFDE /* SafariViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3F0F4B29DC1FFC00F1CFDE /* SafariViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		9C10D84329DBFBC100F2BE40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C3F0F4529DC147200F1CFDE /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		9C3F0F4729DC14D700F1CFDE /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		9C3F0F4B29DC1FFC00F1CFDE /* SafariViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,12 +171,29 @@
 		9C10D83D29DBFBC100F2BE40 /* share */ = {
 			isa = PBXGroup;
 			children = (
-				9C10D83E29DBFBC100F2BE40 /* ShareViewController.swift */,
-				9C3F0F4729DC14D700F1CFDE /* UIImage+Extension.swift */,
-				9C3F0F4529DC147200F1CFDE /* UIViewController+Extension.swift */,
+				9C3F0F4A29DC1FE700F1CFDE /* Extensions */,
+				9C3F0F4929DC1FE000F1CFDE /* View */,
 				9C10D84329DBFBC100F2BE40 /* Info.plist */,
 			);
 			path = share;
+			sourceTree = "<group>";
+		};
+		9C3F0F4929DC1FE000F1CFDE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9C10D83E29DBFBC100F2BE40 /* ShareViewController.swift */,
+				9C3F0F4B29DC1FFC00F1CFDE /* SafariViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9C3F0F4A29DC1FE700F1CFDE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9C3F0F4729DC14D700F1CFDE /* UIImage+Extension.swift */,
+				9C3F0F4529DC147200F1CFDE /* UIViewController+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,6 +386,7 @@
 			files = (
 				9C3F0F4829DC14D700F1CFDE /* UIImage+Extension.swift in Sources */,
 				9C3F0F4629DC147200F1CFDE /* UIViewController+Extension.swift in Sources */,
+				9C3F0F4C29DC1FFC00F1CFDE /* SafariViewController.swift in Sources */,
 				9C10D83F29DBFBC100F2BE40 /* ShareViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
