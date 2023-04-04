@@ -7,24 +7,58 @@
 
 import UIKit
 import Social
+import UniformTypeIdentifiers
 
-class ShareViewController: SLComposeServiceViewController {
-
-    override func isContentValid() -> Bool {
-        // Do validation of contentText and/or NSExtensionContext attachments here
-        return true
-    }
-
-    override func didSelectPost() {
-        // This is called after the user selects Post. Do the upload of contentText and/or NSExtensionContext attachments.
+@objc(ShareViewController)
+class ShareViewController: UIViewController {
     
-        // Inform the host that we're done, so it un-blocks its UI. Note: Alternatively you could call super's -didSelectPost, which will similarly complete the extension context.
-        self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+    private let imageTypeIdentifier = UTType.image.identifier
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        handleShareItem()
     }
-
-    override func configurationItems() -> [Any]! {
-        // To add configuration options via table cells at the bottom of the sheet, return an array of SLComposeSheetConfigurationItem here.
-        return []
+    
+    private func handleShareItem() {
+        guard
+            let extensionItem = extensionContext?.inputItems.first as? NSExtensionItem,
+            let itemProvider = extensionItem.attachments?.first,
+            itemProvider.hasItemConformingToTypeIdentifier(imageTypeIdentifier)
+        else {
+            self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
+            return
+        }
+        handleImage(with: itemProvider)
     }
+    
+    private func handleImage(with itemProvider: NSItemProvider) {
+        itemProvider.loadItem(forTypeIdentifier: imageTypeIdentifier, options: nil) { (item, error) in
+            let image: UIImage? = {
+                if let itemURL = item as? URL {
+                    return UIImage(contentsOfFile: itemURL.path)
+                } else {
+                    return item as? UIImage
+                }
+            }()
+            guard let image, let urlString = image.getURLFromImage() else { return }
+        }
+    }
+}
 
+extension UIImage {
+    func getURLFromImage() -> String? {
+        guard let image = CIImage(image: self) else { return "" }
+
+        let detector = CIDetector(
+            ofType: CIDetectorTypeQRCode,
+            context: nil,
+            options: [CIDetectorAccuracy: CIDetectorAccuracyHigh]
+        )
+
+        let features = detector?.features(in: image) ?? []
+
+        return features
+            .compactMap { ($0 as? CIQRCodeFeature)?.messageString }
+            .first
+    }
 }
