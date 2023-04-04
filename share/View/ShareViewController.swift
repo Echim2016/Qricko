@@ -13,8 +13,8 @@ class ShareViewController: UIViewController {
     
     private let imageTypeIdentifier = UTType.image.identifier
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         handleShareItem()
     }
     
