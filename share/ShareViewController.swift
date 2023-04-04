@@ -7,6 +7,7 @@
 
 import UIKit
 import Social
+import SafariServices
 import UniformTypeIdentifiers
 
 @objc(ShareViewController)
@@ -41,6 +42,9 @@ class ShareViewController: UIViewController {
                 }
             }()
             guard let image, let urlString = image.getURLFromImage() else { return }
+            DispatchQueue.main.async {
+                self.showWebView(urlString)
+            }
         }
     }
 }
@@ -60,5 +64,14 @@ extension UIImage {
         return features
             .compactMap { ($0 as? CIQRCodeFeature)?.messageString }
             .first
+    }
+}
+
+extension UIViewController {
+    func showWebView(_ urlString: String) {
+        if let url = URL(string: urlString) {
+            let vc = SFSafariViewController(url: url)
+            self.present(vc, animated: true)
+        }
     }
 }
