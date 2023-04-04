@@ -18,6 +18,8 @@
 		9C10D81829DBF94300F2BE40 /* QrickoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C10D81729DBF94300F2BE40 /* QrickoUITestsLaunchTests.swift */; };
 		9C10D83F29DBFBC100F2BE40 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C10D83E29DBFBC100F2BE40 /* ShareViewController.swift */; };
 		9C10D84629DBFBC100F2BE40 /* share.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9C10D83C29DBFBC100F2BE40 /* share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9C3F0F4629DC147200F1CFDE /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3F0F4529DC147200F1CFDE /* UIViewController+Extension.swift */; };
+		9C3F0F4829DC14D700F1CFDE /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3F0F4729DC14D700F1CFDE /* UIImage+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,8 @@
 		9C10D83C29DBFBC100F2BE40 /* share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C10D83E29DBFBC100F2BE40 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		9C10D84329DBFBC100F2BE40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C3F0F4529DC147200F1CFDE /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		9C3F0F4729DC14D700F1CFDE /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +170,8 @@
 			isa = PBXGroup;
 			children = (
 				9C10D83E29DBFBC100F2BE40 /* ShareViewController.swift */,
+				9C3F0F4729DC14D700F1CFDE /* UIImage+Extension.swift */,
+				9C3F0F4529DC147200F1CFDE /* UIViewController+Extension.swift */,
 				9C10D84329DBFBC100F2BE40 /* Info.plist */,
 			);
 			path = share;
@@ -359,6 +365,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C3F0F4829DC14D700F1CFDE /* UIImage+Extension.swift in Sources */,
+				9C3F0F4629DC147200F1CFDE /* UIViewController+Extension.swift in Sources */,
 				9C10D83F29DBFBC100F2BE40 /* ShareViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

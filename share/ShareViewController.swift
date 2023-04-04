@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import Social
-import SafariServices
 import UniformTypeIdentifiers
 
 @objc(ShareViewController)
@@ -45,33 +43,6 @@ class ShareViewController: UIViewController {
             DispatchQueue.main.async {
                 self.showWebView(urlString)
             }
-        }
-    }
-}
-
-extension UIImage {
-    func getURLFromImage() -> String? {
-        guard let image = CIImage(image: self) else { return "" }
-
-        let detector = CIDetector(
-            ofType: CIDetectorTypeQRCode,
-            context: nil,
-            options: [CIDetectorAccuracy: CIDetectorAccuracyHigh]
-        )
-
-        let features = detector?.features(in: image) ?? []
-
-        return features
-            .compactMap { ($0 as? CIQRCodeFeature)?.messageString }
-            .first
-    }
-}
-
-extension UIViewController {
-    func showWebView(_ urlString: String) {
-        if let url = URL(string: urlString) {
-            let vc = SFSafariViewController(url: url)
-            self.present(vc, animated: true)
         }
     }
 }
