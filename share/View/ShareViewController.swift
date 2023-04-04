@@ -73,16 +73,16 @@ class ShareViewController: UIViewController {
 
 extension ShareViewController {
     private func showAlert(with message: String) {
-        let controller = UIAlertController(
-            title: nil,
-            message: message,
-            preferredStyle: .alert
-        )
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            self.extensionContext?.completeRequest(returningItems: nil)
-        }
-        controller.addAction(okAction)
         DispatchQueue.main.async {
+            let controller = UIAlertController(
+                title: nil,
+                message: message,
+                preferredStyle: .alert
+            )
+            let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+                self.extensionContext?.completeRequest(returningItems: nil)
+            }
+            controller.addAction(okAction)
             self.present(controller, animated: true)
         }
     }
